@@ -30,3 +30,13 @@ vim.keymap.set({ "n", "x", "o" }, "[c", function() move.goto_previous_start("@cl
 local swap = require("nvim-treesitter-textobjects.swap")
 vim.keymap.set("n", "<leader>a", function() swap.swap_next("@parameter.inner") end)
 vim.keymap.set("n", "<leader>A", function() swap.swap_previous("@parameter.inner") end)
+
+-- Convenience Keymaps --
+vim.keymap.set({"n", "i"}, "<leader>w", "<cmd>w<cr>")
+vim.keymap.set("n", "<leader>sv", "<cmd>vsplit<cr>")
+vim.keymap.set("n", "<leader>sh", "<cmd>split<cr>")
+vim.api.nvim_create_autocmd("LspAttach", {
+    callback = function(args)
+        vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = args.buf })
+    end,
+})

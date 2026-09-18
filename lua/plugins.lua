@@ -60,7 +60,7 @@ require("lazy").setup({
         "neovim/nvim-lspconfig",
         lazy = false,
         config = function()
-            vim.lsp.enable({"lua_ls", "basedpyright", "ruff" })
+            vim.lsp.enable({"lua_ls", "pyright", "ruff" })
         end,
     },
     {
