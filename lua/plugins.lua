@@ -105,16 +105,44 @@ require("lazy").setup({
     },
     {
         "nvim-telescope/telescope.nvim",
-        dependencies = { "nvim-lua/plenary.nvim" },
-        cmd = "Telescope",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "nvim-telescope/telescope-live-grep-args.nvim",
+        },
         keys = {
             { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find files" },
-            { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Grep in project" },
+            {
+                "<leader>fg",
+                function()
+                    require("telescope").extensions.live_grep_args.live_grep_args()
+                end,
+                desc = "Grep in project (With args)"
+            },
             { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Open buffers" },
         },
+        config = function()
+            local telescope = require("telescope")
+            local lga_actions = require("telescope-live-grep-args.actions")
+
+            telescope.setup({
+                extensions = {
+                    live_grep_args = {
+                        auto_quoting = true,
+                        mappings = {
+                            i = {
+                                ["<C-k>"] = lga_actions.quote_prompt(),
+                                ["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
+                            },
+                        },
+                    },
+                },
+            })
+
+            telescope.load_extension("live_grep_args")
+        end,
     },
     {
-        "nvim-mini/mini.files",
+        "echasnovski/mini.files",
         version = '*',
         config = function()
             require("mini.files").setup()
