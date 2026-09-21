@@ -44,3 +44,10 @@ vim.keymap.set("n", "<A-Up>", "<cmd>resize +2<cr>")
 vim.keymap.set("n", "<A-Down>", "<cmd>resize -2<cr>")
 vim.keymap.set("n", "<A-Left>", "<cmd>vertical resize -2<cr>")
 vim.keymap.set("n", "<A-Right>", "<cmd>vertical resize +2<cr>")
+
+vim.keymap.set('i', '"', '""<Left>')
+vim.keymap.set('i', "'", "''<Left>")
+vim.keymap.set('i', '(', '()<Left>')
+vim.keymap.set('i', '{', '{}<Left>')
+vim.keymap.set('i', '[', '[]<Left>')
+
